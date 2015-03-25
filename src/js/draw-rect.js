@@ -75,6 +75,9 @@
             var startY = null;
             var dragging = false;
             that.$ele.bind('mousedown.drag', function (event) {
+				if(event.srcElement.parentElement!==that.$ele[0].parentElement){
+					return;
+				}
                 startOffset = {x: that.offsetX, y: that.offsetY};
                 startX = event.pageX;
                 startY = event.pageY;
@@ -391,6 +394,9 @@
                 if (that.isEventFromMover(event)) {
                     return;
                 }
+				if(event.srcElement.id!==$ele[0].id){
+					return;
+				}
                 //如果事件源不是来自 rect
                 startOffset = Painter.positionRelativeTo(event.pageX, event.pageY, $ele[0]);
                 newRect = that.paintRect(startOffset.x, startOffset.y, 0, 0);
