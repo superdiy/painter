@@ -19,19 +19,29 @@
             $(function() {
 
                 function initRect(rect) {
+                    rect.ele.oncontextmenu = function(event) {
+                        if (event.button === 2) {
+                            if ((new Date().getTime() - event.srcElement.getAttribute("del")) < 500)
+                                rect.remove();
+                            event.srcElement.setAttribute("del", new Date().getTime());
+                            console.log(event.srcElement.getAttribute("del"));
+                        }
+                        return false;
+                    };
                     $(rect.ele).append('<textarea type="text" class="rect" style="color:white;background-color:black;" >画框/拖动 创建你的演示页面</textarea>');
                     //允许缩放
                     rect.resizable();
                     //缩放时不允许拖动
                     $(rect.ele).find('.mover').on('mouseover', function() {
-                        rect.undrag()
+                        rect.undrag();
                     }).on('mouseout', function() {
-                        rect.dragable()
+                        rect.dragable();
                     });
                     rect.onResize(function(event) {
                     });
 
                     rect.onDrag(function(event) {
+
                     });
                 }
                 var playground = Painter.playground({
