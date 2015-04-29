@@ -75,7 +75,7 @@
             var startY = null;
             var dragging = false;
             that.$ele.bind('mousedown.drag', function (event) {
-				if(event.srcElement.parentElement!==that.$ele[0].parentElement){
+				if(event.target.parentElement!==that.$ele[0].parentElement){
 					return;
 				}
                 startOffset = {x: that.offsetX, y: that.offsetY};
@@ -394,7 +394,7 @@
                 if (that.isEventFromMover(event)) {
                     return;
                 }
-				if(event.srcElement.id!==$ele[0].id){
+				if(event.target.id!==$ele[0].id){
 					return;
 				}
                 //如果事件源不是来自 rect
